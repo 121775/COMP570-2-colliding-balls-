@@ -1,0 +1,92 @@
+class Ball {
+  float x, y;          //horizontal, vertical position
+  float dx, dy;        //vertical and horizontal speed
+  float r;             //radii of the ball
+  float outlineWidth;  //variable for outline width of the ball
+  color outLine;       //variable for ball's outline(stroke) color
+  color ballColour;    //ball fill colour
+  Ball partner;        //variable for two balls to be partner to each other
+
+  Ball() //declares constructures for the ball
+  {
+    x = random(0, width-1);  //random x position to keep the ball inside the canvas
+    y = random(0, height-1); //random y position to keep the ball inside the canvas
+    r = random(30, 40);      //random radii between 30 to 40.
+    ballColour = color(random(256), random(256), random(256));  //random ball color for each RGB value
+    dx = random(-5.0, 5.0);  //random horizontal speed between -5 & 5
+    dy = random(-5.0, 5.0);  //random vertical speed between -5 & 5
+    outlineWidth = 3;        
+    outLine = (lerpColor(ballColour, color(0), 0.5)); //50% darker shades for outline
+  }
+
+
+  void render() {  
+    strokeWeight(outlineWidth);
+    stroke(outLine); //공의 색깔보다 50% 어둡게 해야하기 때문에 outline에 lerp 한것을 stroke 에 assign 합니다.
+    fill(ballColour);
+    ellipse(x, y, r*2, r*2);  //draws ellipse
+  }
+
+  /*moves the x and y position assigning the horizontal and vertical speed
+   for each value */
+
+  void move() {
+    x+= dx;
+    y+= dy;
+  }
+
+  /*
+  Checks the collision of two balls
+   in order to make them green when collide
+   */
+/* 어떤 공을 말하는 것인지 명확하게 하기 위해 this~ & _otherBall 을 사용합니다. 여기서 this는 b1이고, _otherBall은 b2 입니다. */
+  void checkCollision(Ball _otherBall)
+  {
+    if ( dist(this.x, this.y, _otherBall.x, _otherBall.y) <= this.r + _otherBall.r && partner == null) 
+    //condition when the balls collide 
+    {
+      this.dx = (this.dx+_otherBall.dx)/2; 
+      this.dy = (this.dy+_otherBall.dy)/2;
+      _otherBall.dx = this.dx;            
+      _otherBall.dy = this.dy;               
+      this.ballColour         = DARK_GREEN;  
+      _otherBall.ballColour   = DARK_GREEN;  //Both balls turns dark green
+      this.outlineWidth       = 0;
+      _otherBall.outlineWidth = 0;           //outline weight for both balls dissappear
+      this.partner = _otherBall;
+      _otherBall.partner = this;             
+    }
+  }
+
+  void update() {
+
+    //bounces the ball when the ball hit bottom edge
+    if ((y+r >= height-1) && (dy>0)) {
+      dy=-dy;
+      if (partner != null) {
+        partner.dy *= -1;
+      }
+    }
+    //bounces the ball when the ball hit top edge
+    if ((y-r<=0) && (dy < 0)) {
+      dy=-dy;
+      if (partner != null) {
+        partner.dy *= -1;
+      }
+    }
+    //bounces the ball when the ball hit the left edge
+    if ((x-r <=0) && (dx < 0)) {
+      dx=-dx;
+      if (partner != null) {
+        partner.dx *= -1;
+      }
+    }
+    //bounces the ball when the ball hit the right edge
+    if ((x+r>=width-1) && (dx>0)) {
+      dx=-dx;
+      if (partner != null) {
+        partner.dx *= -1;
+      }
+    }
+  }
+}
