@@ -2,6 +2,9 @@ final color DARK_GREEN = color(0, 128, 0);  //global colour variable Dark green
 
 Ball b1, b2; //declares the instances for two balls
 
+/*무언가를 선언할때에 내가 직접 컨트롤 해야 하는 것은 new Ball();안에, 
+한개의 Constructors로 여러개를 해결할 수 있는것은 Class 안의 Ball()코맨드를 사용하세요. */
+
 void setup() {
   size(500, 500, P2D); //sets up the canvas
   b1 = new Ball(); //declears b1 instance ball1 in accordance to class
