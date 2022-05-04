@@ -1,11 +1,3 @@
-/* Naeun Kim 18036853
- * comp570 Assessment two
- * This programme draws two bouncing balls
- * which have random color, radius, speed, and stroke color.
- * When they collide, they turn green together and stick together
- * and keep moving around while being stuck together.
- */
-
 final color DARK_GREEN = color(0, 128, 0);  //global colour variable Dark green
 
 Ball b1, b2; //declares the instances for two balls
@@ -16,6 +8,7 @@ void setup() {
   b2 = new Ball(); //declears b1 instance ball1 in accordance to class
 }
 
+/*Class 탭에 이미 constructors를 선언해 놓았기 때문에 메인 커멘드만 써도 됩니다*/
 void draw() {
   b1.update();     //updates the ball one to be shown on the screen
   b2.update();     //updates the ball one to be shown on the screen
@@ -26,5 +19,6 @@ void draw() {
   b1.render();  //shows the ball 1 on the canvas
   b2.render();  //shows the ball 2 on the canvas
 
+/*instance.(declareation)(subject);*/
   b1.checkCollision(b2); //checks the collision of two balls
 }
