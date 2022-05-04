@@ -30,7 +30,7 @@ class Ball {
   /*moves the x and y position assigning the horizontal and vertical speed
    for each value */
 
-  void move() {
+  void move() {     //두 공의 x,y position에  dx, dy (속도) 값을 더합니다. 여기서 void move() 로 따로 옮긴 이유는 두 공이 서로 부딧치기 전의 상황이기 때문입니다.
     x+= dx;
     y+= dy;
   }
@@ -53,7 +53,10 @@ class Ball {
       _otherBall.ballColour   = DARK_GREEN;  //Both balls turns dark green
       this.outlineWidth       = 0;
       _otherBall.outlineWidth = 0;           //outline weight for both balls dissappear
-      this.partner = _otherBall;
+      
+    /*부딧힌 후에 서로 같이 움직일 수 있도록 서로를 '파트너' 로 지정해줍니다. 
+    이 경우, 서로가 맞붙어 있으며, 공 한개가 벽에 부딧쳐 다른 곳으로 가면 다른 공도 똑같이 움직입니다.*/
+      this.partner = _otherBall;            
       _otherBall.partner = this;             
     }
   }
