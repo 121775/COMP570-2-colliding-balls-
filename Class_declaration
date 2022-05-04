@@ -16,7 +16,9 @@ class Ball {
     dx = random(-5.0, 5.0);  //random horizontal speed between -5 & 5
     dy = random(-5.0, 5.0);  //random vertical speed between -5 & 5
     outlineWidth = 3;        
-    outLine = (lerpColor(ballColour, color(0), 0.5)); //50% darker shades for outline
+    
+    //Lerp: (색1, 색2, 사이 값); 입니다. 
+    outLine = (lerpColor(ballColour, color(0), 0.5)); 
   }
 
 
