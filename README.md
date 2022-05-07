@@ -6,4 +6,5 @@ Colliding balls
  * When they collide, they turn green together and stick together
  * and keep moving around while being stuck together.
  * They will maintain same velocity after then. 
- */
+ *
+ * @This code copyright is reserved 
